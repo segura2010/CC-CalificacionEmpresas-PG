@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>main.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="Empresa.html">
+                  Empresa.js
+                </a>
+              
+                
+                <a class="source" href="Usuario.html">
+                  Usuario.js
+                </a>
+              
+                
+                <a class="source" href="Gruntfile.html">
+                  Gruntfile.js
+                </a>
+              
+                
+                <a class="source" href="main.html">
+                  main.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>main.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>DB Libs </p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> mongo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mongodb'</span>);
+<span class="hljs-keyword">var</span> monk = <span class="hljs-built_in">require</span>(<span class="hljs-string">'monk'</span>);
+<span class="hljs-keyword">var</span> db = monk(<span class="hljs-string">'localhost:27017/p1ej2'</span>);
+
+<span class="hljs-keyword">var</span> empresas = db.get(<span class="hljs-string">"empresas"</span>);
+<span class="hljs-keyword">var</span> usuarios = db.get(<span class="hljs-string">"usuarios"</span>);
+
+<span class="hljs-keyword">var</span> Empresa = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/Empresa'</span>)).EmpresaControlador(empresas);
+<span class="hljs-keyword">var</span> Usuario = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">require</span>(<span class="hljs-string">'./lib/Usuario'</span>)).UsuarioControlador(usuarios);
+
+Empresa.add(<span class="hljs-string">"primera"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, result</span>)</span>{
+	<span class="hljs-keyword">if</span>(err){
+		<span class="hljs-built_in">console</span>.log(err);
+	}
+	<span class="hljs-keyword">else</span>
+	{
+		<span class="hljs-built_in">console</span>.log(result);
+	}
+
+	Usuario.add(<span class="hljs-string">"usuario1"</span>, <span class="hljs-string">"password"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, result</span>)</span>{
+
+		<span class="hljs-keyword">if</span>(err){
+			<span class="hljs-built_in">console</span>.log(err);
+		}
+		<span class="hljs-keyword">else</span>
+		{
+			<span class="hljs-built_in">console</span>.log(result);
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Añadida!"</span>);
+		}
+
+		Usuario.getByName(<span class="hljs-string">"usuario1"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, result</span>)</span>{
+			<span class="hljs-keyword">if</span>(err){
+				<span class="hljs-built_in">console</span>.log(err);
+			}
+			<span class="hljs-built_in">console</span>.log(result);
+
+			<span class="hljs-comment">/*
+			Empresa.list(3, function(err, result){
+				console.log(result);
+			});
+			*/</span>
+
+			
+			Empresa.addCalificacionByName(result[<span class="hljs-number">0</span>]._id, <span class="hljs-string">"primera"</span>, <span class="hljs-number">2</span>, Usuario, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, result</span>)</span>{
+				<span class="hljs-keyword">if</span>(err){
+					<span class="hljs-built_in">console</span>.log(err);
+				}
+				<span class="hljs-keyword">else</span>
+				{
+					<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Calificada!"</span>);
+				}
+			});
+			
+		});
+	});
+});
+
+<span class="hljs-comment">/*
+var Empresa = require("./lib/Empresa.js");
+
+
+var e = new Empresa.Empresa("hola", 1);
+
+
+console.log(e.asString());
+*/</span></pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
